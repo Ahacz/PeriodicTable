@@ -2,12 +2,12 @@
     <h1>Periodic Table</h1>
     <mat-form-field>
       <mat-label>Filter Elements</mat-label>
-      <input matInput (input)="onFilter($event)" placeholder="Search by name or symbol" />
+      <input matInput (input)="onFilter($event)"/>
     </mat-form-field>
   
     <div class="periodic-table">
       <div
-        *ngFor="let element of elements"
+        *ngFor="let element of elements$ | async"
         [class.highlighted]="element.isHighlighted"
         class="periodic-element"
       >
@@ -20,10 +20,3 @@
       </div>
     </div>
   </div>
-  <hr>
-  <h1>
-    elements.length: {{elements.length}}
-  </h1>
-  <h1>
-    this.elementsTable.length: {{this.elementsTable.length}}
-  </h1>

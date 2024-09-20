@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { debounceTime, Subject } from 'rxjs';
+import { debounceTime, EMPTY, Observable, Subject, map } from 'rxjs';
 import { CommonModule } from '@angular/common';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -8,6 +8,8 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { EditElementDialogComponent } from '../edit-element-dialog/edit-element-dialog.component';
+import { APIService } from '../services/api.service';
+
 
 // Define the PeriodicElement interface
 interface PeriodicElement {
@@ -18,18 +20,6 @@ interface PeriodicElement {
   isHighlighted?: boolean;
 }
 
-const ELEMENT_DATA: PeriodicElement[] = [
-  { position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H' },
-  { position: 2, name: 'Helium', weight: 4.0026, symbol: 'He' },
-  { position: 3, name: 'Lithium', weight: 6.941, symbol: 'Li' },
-  { position: 4, name: 'Beryllium', weight: 9.0122, symbol: 'Be' },
-  { position: 5, name: 'Boron', weight: 10.811, symbol: 'B' },
-  { position: 6, name: 'Carbon', weight: 12.0107, symbol: 'C' },
-  { position: 7, name: 'Nitrogen', weight: 14.0067, symbol: 'N' },
-  { position: 8, name: 'Oxygen', weight: 15.9994, symbol: 'O' },
-  { position: 9, name: 'Fluorine', weight: 18.9984, symbol: 'F' },
-  { position: 10, name: 'Neon', weight: 20.1797, symbol: 'Ne' },
-];
 
 @Component({
   selector: 'app-root',
@@ -42,12 +32,12 @@ const ELEMENT_DATA: PeriodicElement[] = [
     MatInputModule,
     MatDialogModule,
     FormsModule,
-    MatButtonModule,
+    MatButtonModule
   ],
 })
 
 export class PeriodicTableComponent implements OnInit {
-  elements: PeriodicElement[] = ELEMENT_DATA;
+  elements$: Observable<any>;
   elementsTable: Array<Array<PeriodicElement | null>> = [];
   lanthanidesActinidesTable: Array<Array<PeriodicElement | null>> = [];
   filterText: string = '';
@@ -55,7 +45,10 @@ export class PeriodicTableComponent implements OnInit {
 
   dataLoading = true;
 
-  constructor(private dialog: MatDialog) {
+  constructor(private dialog: MatDialog,
+    private api: APIService,
+  ) {
+    this.elements$ = EMPTY;
     // Debounce the filter input with a 2-second delay
     this.filterSubject.pipe(debounceTime(2000)).subscribe((filterValue) => {
       this.applyFilter(filterValue);
@@ -63,6 +56,7 @@ export class PeriodicTableComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.elements$ = this.api.getData();
     this.elementsTable = Array.from({ length: 7 }, () => Array(18).fill(null));
     this.lanthanidesActinidesTable = Array.from({ length: 2 }, () => Array(14).fill(null));
 
@@ -77,12 +71,14 @@ export class PeriodicTableComponent implements OnInit {
   }
 
   populateTable() {
-    for (const element of ELEMENT_DATA) {
-      const position = [Math.floor((element.position - 1) / 18), (element.position - 1) % 18];
-      this.elementsTable[position[0]][position[1]] = { ...element, isHighlighted: false };
-    }
+    this.elements$.subscribe((elements: PeriodicElement[]) => {
+      for (const element of elements) {
+        const position = [Math.floor((element.position - 1) / 18), (element.position - 1) % 18];
+        this.elementsTable[position[0]][position[1]] = { ...element, isHighlighted: false };
+      }
+    });
   }
-
+  
   filterElements() {
     const searchText = this.filterText.toLowerCase();
 
@@ -123,13 +119,20 @@ export class PeriodicTableComponent implements OnInit {
 
   applyFilter(filterValue: string): void {
     const lowerCaseFilter = filterValue.toLowerCase();
-    this.elements = this.elements.map((el) => ({
-      ...el,
-      // Highlighting is only for display purposes
-      isHighlighted: lowerCaseFilter ? 
-        (el.name.toLowerCase().includes(lowerCaseFilter) || 
-        el.symbol.toLowerCase().includes(lowerCaseFilter)) : false,
-    }));
+    
+    // Transform the elements$ observable using the map operator
+    this.elements$ = this.elements$.pipe(
+      map((elements: PeriodicElement[]) => 
+        elements.map((el) => ({
+          ...el,
+          // Highlighting is only for display purposes
+          isHighlighted: lowerCaseFilter
+            ? el.name.toLowerCase().includes(lowerCaseFilter) || 
+              el.symbol.toLowerCase().includes(lowerCaseFilter)
+            : false,
+        }))
+      )
+    );
   }
 
   onFilter(event: Event): void {
