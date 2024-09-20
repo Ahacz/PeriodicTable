@@ -7,7 +7,7 @@
   
     <div class="periodic-table">
       <div
-        *ngFor="let element of displayedElements"
+        *ngFor="let element of elements"
         [class.highlighted]="element.isHighlighted"
         class="periodic-element"
       >
@@ -20,3 +20,10 @@
       </div>
     </div>
   </div>
+  <hr>
+  <h1>
+    elements.length: {{elements.length}}
+  </h1>
+  <h1>
+    this.elementsTable.length: {{this.elementsTable.length}}
+  </h1>

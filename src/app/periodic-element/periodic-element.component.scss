@@ -1,26 +1,17 @@
-.element {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    border: 1px solid #ccc;
-    width: 50px;
-    height: 70px;
-    margin: 2px;
-    font-family: Arial, sans-serif;
+.highlighted {
+    background-color: yellow; // Change to desired highlight color
+  }
   
-    .symbol {
-      font-size: 24px;
-      font-weight: bold;
-    }
-    
-    .name {
-      font-size: 16px;
-    }
-    
-    .mass {
-      font-size: 12px;
-      color: #777;
-    }
+  .symbol {
+    font-size: 24px;
+    font-weight: bold;
+  }
+  
+  .name {
+    font-size: 16px;
+  }
+  
+  .weight {
+    font-size: 12px;
   }
   

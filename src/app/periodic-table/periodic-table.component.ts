@@ -47,10 +47,9 @@ const ELEMENT_DATA: PeriodicElement[] = [
 })
 
 export class PeriodicTableComponent implements OnInit {
-  elements: PeriodicElement[] = [];
-  displayedElements: PeriodicElement[] = [];
-  tableRows: Array<Array<PeriodicElement | null>> = [];
-  lanthanidesActinidesRows: Array<Array<PeriodicElement | null>> = [];
+  elements: PeriodicElement[] = ELEMENT_DATA;
+  elementsTable: Array<Array<PeriodicElement | null>> = [];
+  lanthanidesActinidesTable: Array<Array<PeriodicElement | null>> = [];
   filterText: string = '';
   private filterSubject = new Subject<string>();
 
@@ -64,8 +63,8 @@ export class PeriodicTableComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.tableRows = Array.from({ length: 7 }, () => Array(18).fill(null));
-    this.lanthanidesActinidesRows = Array.from({ length: 2 }, () => Array(14).fill(null));
+    this.elementsTable = Array.from({ length: 7 }, () => Array(18).fill(null));
+    this.lanthanidesActinidesTable = Array.from({ length: 2 }, () => Array(14).fill(null));
 
     // Populate the main periodic table
     this.populateTable();
@@ -80,7 +79,7 @@ export class PeriodicTableComponent implements OnInit {
   populateTable() {
     for (const element of ELEMENT_DATA) {
       const position = [Math.floor((element.position - 1) / 18), (element.position - 1) % 18];
-      this.tableRows[position[0]][position[1]] = { ...element, isHighlighted: false };
+      this.elementsTable[position[0]][position[1]] = { ...element, isHighlighted: false };
     }
   }
 
@@ -91,7 +90,7 @@ export class PeriodicTableComponent implements OnInit {
     const clearHighlight = searchText === '';
 
     // Highlight elements in the main table
-    for (const row of this.tableRows) {
+    for (const row of this.elementsTable) {
       for (const element of row) {
         if (element) {
           element.isHighlighted = !clearHighlight && element.name.toLowerCase().includes(searchText);
@@ -100,7 +99,7 @@ export class PeriodicTableComponent implements OnInit {
     }
 
     // Highlight elements in the lanthanides and actinides table (if applicable)
-    for (const row of this.lanthanidesActinidesRows) {
+    for (const row of this.lanthanidesActinidesTable) {
       for (const element of row) {
         if (element) {
           element.isHighlighted = !clearHighlight && element.name.toLowerCase().includes(searchText);
@@ -124,11 +123,12 @@ export class PeriodicTableComponent implements OnInit {
 
   applyFilter(filterValue: string): void {
     const lowerCaseFilter = filterValue.toLowerCase();
-    this.displayedElements = this.elements.map((el) => ({
+    this.elements = this.elements.map((el) => ({
       ...el,
       // Highlighting is only for display purposes
-      isHighlighted: el.name.toLowerCase().includes(lowerCaseFilter) || 
-                     el.symbol.toLowerCase().includes(lowerCaseFilter),
+      isHighlighted: lowerCaseFilter ? 
+        (el.name.toLowerCase().includes(lowerCaseFilter) || 
+        el.symbol.toLowerCase().includes(lowerCaseFilter)) : false,
     }));
   }
 
