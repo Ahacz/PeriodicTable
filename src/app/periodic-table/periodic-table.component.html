@@ -1,0 +1,22 @@
+<div>
+    <h1>Periodic Table</h1>
+    <mat-form-field>
+      <mat-label>Filter Elements</mat-label>
+      <input matInput (input)="onFilter($event)" placeholder="Search by name or symbol" />
+    </mat-form-field>
+  
+    <div class="periodic-table">
+      <div
+        *ngFor="let element of displayedElements"
+        [class.highlighted]="element.isHighlighted"
+        class="periodic-element"
+      >
+        <div (click)="openEditDialog(element)">
+          <p>{{ element.position }}</p>
+          <h3>{{ element.symbol }}</h3>
+          <p>{{ element.name }}</p>
+          <p>{{ element.weight }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
