@@ -14,4 +14,12 @@
   .weight {
     font-size: 12px;
   }
-  
+  .tile {
+    background-color: yellow;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid black; /* Optional: to visualize the tile borders */
+  }

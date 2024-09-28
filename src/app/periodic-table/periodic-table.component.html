@@ -6,9 +6,9 @@
         @for(row of elementsTable;track row){
           <tr>
             @for(col of row; track col){
-              <td class="element-cell">
+              <td class="table-cell">
                 @if(col!=null){
-                  <app-periodic-element ></app-periodic-element>
+                  <app-periodic-element [element]="col"></app-periodic-element>
                 }
               </td>
             }

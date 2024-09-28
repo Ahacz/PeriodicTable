@@ -35,7 +35,7 @@ export class PeriodicTableComponent implements OnInit {
 
   constructor(private dialog: MatDialog, private api: APIService) {
     this.elements$ = EMPTY;
-    this.elementsTable = Array.from({ length: 10 }, () => Array(19).fill({ empty: true }));
+    this.elementsTable = Array.from({ length: 10 }, () => Array(18).fill({ empty: true }));
     this.PreloadTable();
   }
   PreloadTable() {

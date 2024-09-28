@@ -1,22 +1,31 @@
-.periodic-table {
-    display: grid;
-    grid-template-columns: repeat(18, 1fr); /* Adjust this to fit your periodic table layout */
-    gap: 8px;
-    padding: 20px;
-  }
-  
-  .element-cell {
-    border: 1px solid black;
-    flex: 1;  /* Cells will take equal space within the row */
-    position: relative; /* For pseudo-element trick */
-  }
-  
-  .highlighted {
-    background-color: rgb(255, 238, 0);
-  }
-  
-  .filter-container {
-    display: flex;
-    justify-content: flex-end;
-    margin: 20px;
-  }
+table {
+  width: 100%;  /* Make the table span the entire width */
+  //border-collapse: collapse;
+}
+
+tbody {
+  display: table;
+  flex-direction: column;
+}
+
+tr {
+  display: table-row;  /* Use flexbox for rows */
+  flex:1;       /* Make rows take equal space */
+}
+.table-cell {
+  width: 5.55%;
+  height: 20%;
+  border: 2px solid black;
+  flex: 1;  /* Cells will take equal space within the row */
+  position: relative; /* For pseudo-element trick */
+}
+
+.table-cell::after {
+  content: '';
+  display: flex;
+  padding-top: 130%; 
+}
+
+.table-cell:hover {
+  background-color: green;
+}
