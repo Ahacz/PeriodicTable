@@ -6,9 +6,9 @@
   }
   
   .element-cell {
-    width: 100px;
-    height: 100px;
-    text-align: center;
+    border: 1px solid black;
+    flex: 1;  /* Cells will take equal space within the row */
+    position: relative; /* For pseudo-element trick */
   }
   
   .highlighted {

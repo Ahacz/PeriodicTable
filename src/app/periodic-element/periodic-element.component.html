@@ -1,6 +1,7 @@
-<div [ngClass]="{'highlighted': element.isHighlighted}">
+@if(element){
+  <div [ngClass]="{'highlighted': element.isHighlighted}">
     <div class="symbol">{{ element.symbol }}</div>
     <div class="name">{{ element.name }}</div>
     <div class="weight">{{ element.weight | number:'1.4-4' }}</div>
   </div>
-  
+}

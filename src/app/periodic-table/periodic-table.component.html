@@ -1,22 +1,19 @@
 <div>
     <h1>Periodic Table</h1>
-    <mat-form-field>
-      <mat-label>Filter Elements</mat-label>
-      <input matInput (input)="onFilter($event)"/>
-    </mat-form-field>
   
-    <div class="periodic-table">
-      <div
-        *ngFor="let element of elements$ | async"
-        [class.highlighted]="element.isHighlighted"
-        class="periodic-element"
-      >
-        <div (click)="openEditDialog(element)">
-          <p>{{ element.position }}</p>
-          <h3>{{ element.symbol }}</h3>
-          <p>{{ element.name }}</p>
-          <p>{{ element.weight }}</p>
-        </div>
-      </div>
-    </div>
+    <table>
+      <tbody>
+        @for(row of elementsTable;track row){
+          <tr>
+            @for(col of row; track col){
+              <td class="element-cell">
+                @if(col!=null){
+                  <app-periodic-element ></app-periodic-element>
+                }
+              </td>
+            }
+          </tr>
+        }
+      </tbody>
+    </table>
   </div>
