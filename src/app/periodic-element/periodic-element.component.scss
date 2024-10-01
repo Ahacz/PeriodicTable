@@ -1,25 +1,69 @@
-.highlighted {
-    background-color: yellow; // Change to desired highlight color
-  }
-  
-  .symbol {
-    font-size: 24px;
-    font-weight: bold;
-  }
-  
-  .name {
-    font-size: 16px;
-  }
-  
-  .weight {
-    font-size: 12px;
-  }
+/* Global Styles */
+:host {
+  display: flex;
+  justify-content: center; /* Center the content horizontally */
+  align-items: center; /* Center the content vertically */
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box; /* Ensure padding/borders are included in size calculations */
+  overflow: hidden; /* Prevent content from overflowing */
+}
+.tile {
+  background-color: #fdf6e3;  /* Delikatny pastelowy kolor */
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;  /* Stosujemy flex w pionie */
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;  /* Zaokrąglone rogi */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);  /* Delikatny cień dla głębi */
+  padding: 10px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;  /* Animacja na hover */
+  border: none;  /* Usuwamy widoczne granice */
+}
+
+.tile:hover {
+  transform: scale(1.05);  /* Efekt lekkiego powiększenia przy hover */
+  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);  /* Mocniejszy cień przy hover */
+  background-color: #fef3c7;  /* Zmiana koloru tła przy hover */
+}
+
+/* Symbol (duża czcionka pierwiastka) */
+.symbol {
+  font-size: 2rem;  /* Nowoczesne, większe czcionki */
+  font-weight: bold;
+  color: #1a202c;  /* Ciemny kolor dla kontrastu */
+}
+
+/* Nazwa pierwiastka */
+.name {
+  font-size: 1rem;
+  font-weight: 400;
+  color: #4a5568;  /* Subtelny szary */
+  margin-top: 5px;  /* Mały odstęp od symbolu */
+}
+
+/* Waga pierwiastka */
+.weight {
+  font-size: 0.85rem;
+  color: #718096;  /* Jaśniejszy szary dla mniej ważnej informacji */
+  margin-top: 2px;
+}
+
+/* Responsywność */
+@media (max-width: 768px) {
   .tile {
-    background-color: yellow;
-    height: 100%;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border: 1px solid black; /* Optional: to visualize the tile borders */
+    padding: 8px;
+    font-size: 0.8rem;  /* Mniejsze czcionki na mniejszych ekranach */
   }
+
+  .symbol {
+    font-size: 1.5rem;
+  }
+}
+
+/* Wyróżnienie (highlight) */
+.highlighted {
+  background-color: #ffedd5;  /* Jasny, delikatny kolor dla wyróżnienia */
+}

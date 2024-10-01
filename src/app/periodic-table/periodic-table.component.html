@@ -7,7 +7,7 @@
           <tr>
             @for(col of row; track col){
               <td class="table-cell">
-                @if(col!=null){
+                @if(col.position!=-1){
                   <app-periodic-element [element]="col"></app-periodic-element>
                 }
               </td>

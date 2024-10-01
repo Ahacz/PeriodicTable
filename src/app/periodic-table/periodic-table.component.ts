@@ -35,13 +35,13 @@ export class PeriodicTableComponent implements OnInit {
 
   constructor(private dialog: MatDialog, private api: APIService) {
     this.elements$ = EMPTY;
-    this.elementsTable = Array.from({ length: 10 }, () => Array(18).fill({ empty: true }));
+    this.elementsTable = Array.from({ length: 10 }, () => Array.from({ length: 18 }, () => ({position: -1, name: '', weight: 0, symbol: '', isHighlighted: false })));
     this.PreloadTable();
   }
   PreloadTable() {
     PERIODIC_TABLE_MAP.forEach((value,key) =>{
       this.elementsTable[value[0]][value[1]].position = key;
-    })
+    });
   }
 
   ngOnInit(): void {

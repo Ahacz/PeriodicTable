@@ -15,15 +15,10 @@ tr {
 .table-cell {
   width: 5.55%;
   height: 20%;
-  border: 2px solid black;
+  overflow: hidden;
+  border: none;
   flex: 1;  /* Cells will take equal space within the row */
   position: relative; /* For pseudo-element trick */
-}
-
-.table-cell::after {
-  content: '';
-  display: flex;
-  padding-top: 130%; 
 }
 
 .table-cell:hover {

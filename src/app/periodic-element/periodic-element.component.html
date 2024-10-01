@@ -1,6 +1,7 @@
 <div class="tile">
-  @if(element){
+  @if(element.name!=''){
     <div [ngClass]="{'highlighted': element.isHighlighted}">
+      <div>{{element.position}}</div>
       <div class="symbol">{{ element.symbol }}</div>
       <div class="name">{{ element.name }}</div>
       <div class="weight">{{ element.weight | number:'1.4-4' }}</div>
