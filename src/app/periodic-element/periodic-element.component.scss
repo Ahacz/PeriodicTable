@@ -1,33 +1,40 @@
 .tile {
+  margin: 3px;
   background-color: #fdf6e3;  /* Delikatny pastelowy kolor */
   height: 100%;
   width: auto;
   justify-content: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);  /* Delikatny cień dla głębi */
   border-radius: 10px;  /* Zaokrąglone rogi */
   //box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);  /* Delikatny cień dla głębi */
   padding: 10px;
   transition: transform 0.3s ease  /* Animacja na hover */
 }
 .position {
-  font-size: 0.75rem;  /* Nowoczesne, większe czcionki */
+  margin-left:-10px;
+  vertical-align: top;
+  font-size: 0.5rem;  /* Nowoczesne, większe czcionki */
   text-align: left;
   color: #1a202c;  /* Ciemny kolor dla kontrastu */
 }
 
 .tile:hover {
-  transform: scale(1.05);  /* Efekt lekkiego powiększenia przy hover */
+  z-index: 10;
+  transform: scale(1.1);  /* Efekt lekkiego powiększenia przy hover */
   background-color: #fef3c7;  /* Zmiana koloru tła przy hover */
 }
 
 .symbol {
   text-align: center;
-  font-size: 1.25rem;  
+  vertical-align: top;
+  font-size: 1.5rem;  
   font-weight: bold;
   color: #1a202c; 
-  margin-top: -35%;
+  margin-top: -20%;
 }
 
 .name {
+  text-align: center;
   font-size: 0.5rem;
   font-weight: 400;
   color: #4a5568;  
@@ -36,7 +43,8 @@
 
 /* Waga pierwiastka */
 .weight {
-  font-size: 0.5vh;
+  text-align: center;
+  font-size: 0.75vh;
   color: #718096;  /* Jaśniejszy szary dla mniej ważnej informacji */
   margin: 2px;
 }

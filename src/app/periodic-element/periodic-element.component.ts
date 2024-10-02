@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 export interface PeriodicElement {
   position: number;
@@ -18,4 +19,5 @@ export interface PeriodicElement {
 })
 export class PeriodicElementComponent {
   @Input() element!: PeriodicElement; // Ensure element is passed to the component
+
 }
