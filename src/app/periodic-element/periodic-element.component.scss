@@ -1,17 +1,17 @@
-/* Global Styles */
+/* Global Styles *//*
 :host {
   display: flex;
-  justify-content: center; /* Center the content horizontally */
-  align-items: center; /* Center the content vertically */
+  justify-content: center; //Center the content horizontally 
+  align-items: center; // Center the content vertically 
   width: 100%;
   height: 100%;
-  box-sizing: border-box; /* Ensure padding/borders are included in size calculations */
-  overflow: hidden; /* Prevent content from overflowing */
-}
+  box-sizing: border-box; // Ensure padding/borders are included in size calculations 
+  overflow: hidden; // Prevent content from overflowing 
+}*/
 .tile {
   background-color: #fdf6e3;  /* Delikatny pastelowy kolor */
-  height: 100%;
-  width: 100%;
+  height: 95%;
+  width: 95%;
   display: flex;
   flex-direction: column;  /* Stosujemy flex w pionie */
   justify-content: center;
@@ -22,6 +22,11 @@
   transition: transform 0.3s ease, box-shadow 0.3s ease;  /* Animacja na hover */
   border: none;  /* Usuwamy widoczne granice */
 }
+.position {
+  font-size: 0.5vh;  /* Nowoczesne, większe czcionki */
+  text-align: left;
+  color: #1a202c;  /* Ciemny kolor dla kontrastu */
+}
 
 .tile:hover {
   transform: scale(1.05);  /* Efekt lekkiego powiększenia przy hover */
@@ -31,14 +36,14 @@
 
 /* Symbol (duża czcionka pierwiastka) */
 .symbol {
-  font-size: 2rem;  /* Nowoczesne, większe czcionki */
+  font-size: 1.5vh;  /* Nowoczesne, większe czcionki */
   font-weight: bold;
   color: #1a202c;  /* Ciemny kolor dla kontrastu */
 }
 
 /* Nazwa pierwiastka */
 .name {
-  font-size: 1rem;
+  font-size: 0.75vh;
   font-weight: 400;
   color: #4a5568;  /* Subtelny szary */
   margin-top: 5px;  /* Mały odstęp od symbolu */
@@ -46,7 +51,7 @@
 
 /* Waga pierwiastka */
 .weight {
-  font-size: 0.85rem;
+  font-size: 0.5vh;
   color: #718096;  /* Jaśniejszy szary dla mniej ważnej informacji */
   margin-top: 2px;
 }
