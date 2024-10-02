@@ -2,7 +2,7 @@ title {
   justify-content: center;
 }
 table {
-
+  border-style: none;
   table-layout: fixed;
   width: 100%; 
   //border-collapse: collapse;
@@ -10,8 +10,8 @@ table {
 
 tbody {
 
-  display: table;
-  max-width: 1200px;
+  display:block;
+  max-width: 1400px;
   margin-left: auto;
   margin-right: auto;
   //flex-direction: column;
@@ -22,14 +22,11 @@ tr {
   flex:1;       /* Make rows take equal space */
 }
 .table-cell {
-  width: 5.5vw;
-  height:4vh;
+  width: 4vw;
+  height:5vh;
   overflow: hidden;
   border: none;
   //flex: 1;  /* Cells will take equal space within the row */
   position: relative; /* For pseudo-element trick */
 }
 
-.table-cell:hover {
-  background-color: green;
-}
