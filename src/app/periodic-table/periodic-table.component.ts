@@ -50,6 +50,7 @@ export class PeriodicTableComponent implements OnInit {
   }
 
   populateTable() {
+    //tutaj albo to api na start, a w tryb gry użyj innego api do populate table - trzeba przełączyć subskrypcje albo zaktualizować ten observable
     this.api.getData().pipe(
       tap((elements:PeriodicElement[])=>{
         elements.forEach((element)=>{
